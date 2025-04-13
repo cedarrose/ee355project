@@ -8,21 +8,35 @@ Person::Person(){
 
 
 Person::~Person(){
+    // TODO: complete the method! - done
     delete birthdate;
-    // TODO: complete the method!
+    delete email;
+    delete phone;
+    
 }
 
 
-Person::Person(string f_name, string l_name, string b_date, string email, string phone){
-    // TODO: Complete this method!
+Person::Person(string f_name, string l_name, string b_date, string email_str, string phone_str) {
+    // TODO: Complete this method! - done i think??
     // phone and email strings are in full version
-}
+    // Storing the names directly as strings
+    this->f_name = f_name;
+    this->l_name = l_name;
+    
+    birthdate = new Date();
+    birthdate->convert_date(b_date);
 
+    email = new Email(email_str);
+    phone = new Phone(phone_str);
+    
+    // I=initializing LL pointers
+    next = nullptr;
+    prev = nullptr;
+}
 
 Person::Person(string filename){
     set_person(filename);
 }
-
 
 void Person::set_person(){
     // prompts for the information of the user from the terminal
