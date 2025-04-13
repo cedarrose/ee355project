@@ -77,14 +77,40 @@ void Person::set_person(){
     prev = nullptr;
 }
 
-
 void Person::set_person(string filename){
     // reads a Person from a file
     // Look at person_template files as examples.     
     // Phone number in files can have '-' or not.
     // TODO: Complete this method!
-    
-
+    ifstream infile(filename);
+    string line, type, val;
+    // error handling
+    if(!infile.is_open()) {
+        cout << "Error, could not open file." << endl;
+        return;
+    }
+    // read first line, name
+    getline(infile, line);
+    f_name = line;
+    // Read last name
+    getline(infile, line);
+    l_name = line;
+    // Read bday
+    getline(infile, line);
+    birthdate = new Date(line);
+    // Read email
+    getline(infile, type);  
+    getline(infile, val); 
+    email = new Email(type, val);
+    // Read phone
+    getline(infile, type);
+    getline(infile, val);
+    phone = new Phone(type, val);
+    // Initialize LL pointers
+    next = nullptr;
+    prev = nullptr;
+    // close file
+    infile.close();
 }
 
 
