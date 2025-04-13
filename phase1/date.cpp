@@ -76,3 +76,16 @@ void Date::print_date(string format) {
         cout << formatted_date << endl;
     }
 }
+
+bool Date::operator==(const Date& rhs)
+{
+    if (formatted_date == rhs.formatted_date)
+        return true;
+    return false;
+}
+bool Date::operator!=(const Date& rhs)
+{
+    if (this == rhs)
+        return false;
+    return true;
+}

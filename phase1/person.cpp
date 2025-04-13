@@ -92,12 +92,21 @@ bool Person::operator==(const Person& rhs){
     // TODO: Complete this method!
     // Note: you should check first name, last name and birthday between two persons
     // refer to bool Date::operator==(const Date& rhs)
-    return false; //temporary
+    if (this->f_name != rhs->f_name)
+        return false;
+    if (this->l_name != rhs->l_name)
+        return false;
+    if (this->birthdate != rhs->birthdate)
+        return false;
+    
+    return true; //temporary
 }
 
 bool Person::operator!=(const Person& rhs){ 
     // TODO: Complete this method!
-    return false; //temporary
+    if (this == rhs) // This line might be wrong - Grish
+        return false;
+    return true; //temporary
 }
 
 
