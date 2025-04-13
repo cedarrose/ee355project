@@ -1,4 +1,5 @@
 #include "person.h"
+using namespace std;
 
 Person::Person(){
     // I'm already done! 
@@ -28,7 +29,7 @@ Person::Person(string f_name, string l_name, string b_date, string email_str, st
     email = new Email("work", email_str);
     phone = new Phone("home", phone_str);
     
-    // I=initializing LL pointers
+    // initializing LL pointers
     next = nullptr;
     prev = nullptr;
 }
@@ -60,15 +61,20 @@ void Person::set_person(){
     birthdate = new Date(temp); 
 
     cout << "Type of email address: ";
-    // code here
+    std::getline(std::cin, type);
     cout << "Email address: ";
-    // code here
+    std::getline(std::cin, temp);
+    email = new Email(type, temp);
 
     cout << "Type of phone number: ";
-    // code here
+    std::getline(std::cin, type);
     cout << "Phone number: ";
-    // code here
-    // code here
+    std::getline(std::cin, temp);
+    phone = new Phone(type, temp);
+
+    // Initialize linked list pointers
+    next = nullptr;
+    prev = nullptr;
 }
 
 
@@ -77,7 +83,7 @@ void Person::set_person(string filename){
     // Look at person_template files as examples.     
     // Phone number in files can have '-' or not.
     // TODO: Complete this method!
-
+    
 
 }
 
