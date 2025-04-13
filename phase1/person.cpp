@@ -99,13 +99,26 @@ void Person::set_person(string filename){
     getline(infile, line);
     birthdate = new Date(line);
     // Read email
-    getline(infile, type);  
-    getline(infile, val); 
+    getline(infile, line);
+    size_t space_pos = line.find(' ');
+    if (space_pos != string::npos) {
+        type = line.substr(1, space_pos-1);  // get first word
+        val = line.substr(space_pos + 1);  // get rest of line
+    }
     email = new Email(type, val);
+    cout << "email in person.cpp = " << email << endl;
+
     // Read phone
-    getline(infile, type);
-    getline(infile, val);
+    getline(infile, line);
+    // getline(infile, val);
+    // phone = new Phone(type, val);
+    space_pos = line.find(' ');
+    if (space_pos != string::npos) {
+        type = line.substr(1, space_pos-1);  // get first word
+        val = line.substr(space_pos + 1);  // get rest of line
+    }
     phone = new Phone(type, val);
+
     // Initialize LL pointers
     next = nullptr;
     prev = nullptr;
@@ -118,11 +131,11 @@ bool Person::operator==(const Person& rhs){
     // TODO: Complete this method!
     // Note: you should check first name, last name and birthday between two persons
     // refer to bool Date::operator==(const Date& rhs)
-    if (this->f_name != rhs->f_name)
+    if (this->f_name != rhs.f_name)
         return false;
-    if (this->l_name != rhs->l_name)
+    if (this->l_name != rhs.l_name)
         return false;
-    if (this->birthdate != rhs->birthdate)
+    if (*(this->birthdate) != *(rhs.birthdate))
         return false;
     
     return true; //temporary
@@ -130,14 +143,13 @@ bool Person::operator==(const Person& rhs){
 
 bool Person::operator!=(const Person& rhs){ 
     // TODO: Complete this method!
-    if (this == rhs) // This line might be wrong - Grish
-        return false;
-    return true; //temporary
+    return !(*this == rhs);
 }
 
 
 void Person::print_person(){
     // Already implemented for you! Do not change!
+    cout << "person.cpp Printing print_person()" << endl;
 	cout << l_name <<", " << f_name << endl;
 	birthdate->print_date("Month D, YYYY");
     phone->print();

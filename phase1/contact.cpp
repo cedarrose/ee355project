@@ -44,8 +44,10 @@ void Email::print(){
 Phone::Phone(string type, string num){
     // TODO: It is possible that num includes "-" or not, manage it!
     // TODO: Complete this method!
-    // Note: We don't want to use C++11! stol is not valid!
+    // Note: We don't want to use C++11! stoi is not valid!
     this->type = type;
+
+    phone_num = ""; // clear string first
     
     int count = 0;
     for (char c : num)
@@ -59,6 +61,8 @@ Phone::Phone(string type, string num){
         if (count == 3 || count == 6)
             phone_num += '-';
     }
+    cout << endl << "TYPE = " << this->type << endl;
+    cout << endl << "phone_num = " << this->phone_num << endl << endl;
 }
 
 

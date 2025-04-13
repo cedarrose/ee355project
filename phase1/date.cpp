@@ -85,7 +85,5 @@ bool Date::operator==(const Date& rhs)
 }
 bool Date::operator!=(const Date& rhs)
 {
-    if (this == rhs)
-        return false;
-    return true;
+    return !(*this == rhs);
 }
