@@ -1,4 +1,3 @@
-
 #include "person.h"
 
 Person::Person(){
@@ -22,12 +21,12 @@ Person::Person(string f_name, string l_name, string b_date, string email_str, st
     // Storing the names directly as strings
     this->f_name = f_name;
     this->l_name = l_name;
-    
-    birthdate = new Date();
+    cout << "Creating person with date: " << b_date << endl;
+    birthdate = new Date(b_date);
     birthdate->convert_date(b_date);
 
-    email = new Email(email_str);
-    phone = new Phone(phone_str);
+    email = new Email("work", email_str);
+    phone = new Phone("home", phone_str);
     
     // I=initializing LL pointers
     next = nullptr;
@@ -78,6 +77,8 @@ void Person::set_person(string filename){
     // Look at person_template files as examples.     
     // Phone number in files can have '-' or not.
     // TODO: Complete this method!
+
+
 }
 
 
@@ -85,10 +86,12 @@ bool Person::operator==(const Person& rhs){
     // TODO: Complete this method!
     // Note: you should check first name, last name and birthday between two persons
     // refer to bool Date::operator==(const Date& rhs)
+    return false; //temporary
 }
 
 bool Person::operator!=(const Person& rhs){ 
     // TODO: Complete this method!
+    return false; //temporary
 }
 
 

@@ -13,6 +13,7 @@ class Date {
         string formatted_date; 
     public:
         Date();
+        Date(string date_str); 
         ~Date();
         string convert_date(string date_bad_format);
         void print_date(string format);
