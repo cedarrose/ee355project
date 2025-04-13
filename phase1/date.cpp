@@ -9,14 +9,13 @@ Date::Date() {
 // }
 Date::Date(string date_str) {
     formatted_date = convert_date(date_str);
-}
+    }
 // destructor
 Date::~Date() { }
 
 string Date::convert_date(string date_bad_format) {
     // --- split the date into the correct format ---
     // find positions of the "/"
-    cout << "Input date string: " << date_bad_format << endl;
     size_t first = date_bad_format.find('/');
     size_t second = date_bad_format.find('/', first + 1); // search for the second after the first
     // extract the M, D, Y
@@ -24,9 +23,6 @@ string Date::convert_date(string date_bad_format) {
     int proper_day = stoi(date_bad_format.substr(first + 1, second - first - 1)); // convert to int
     int proper_year = stoi(date_bad_format.substr(second + 1)); // convert to int
     
-    cout << "Month: '" << int_month << "'" << endl;
-    cout << "Day: '" << proper_day << "'" << endl;
-    cout << "Year: '" << proper_year << "'" << endl;
     string proper_month;
 
     switch(int_month) {
@@ -71,11 +67,12 @@ string Date::convert_date(string date_bad_format) {
             break;
     }
     string final_date = proper_month + " " + to_string(proper_day) + ", " + to_string(proper_year);
-    cout << "final date" << final_date;
     return final_date;
 }
+
 void Date::print_date(string format) {
     if(format == "Month D, YYYY") { 
-        cout << convert_date(format) << endl;
+        // do nothing for now
+        cout << formatted_date << endl;
     }
 }

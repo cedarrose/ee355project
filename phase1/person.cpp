@@ -21,7 +21,7 @@ Person::Person(string f_name, string l_name, string b_date, string email_str, st
     // Storing the names directly as strings
     this->f_name = f_name;
     this->l_name = l_name;
-    cout << "Creating person with date: " << b_date << endl;
+
     birthdate = new Date(b_date);
     birthdate->convert_date(b_date);
 

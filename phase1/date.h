@@ -17,6 +17,7 @@ class Date {
         ~Date();
         string convert_date(string date_bad_format);
         void print_date(string format);
+        string get_date() const { return formatted_date;} // getter for the date
 }; 
 
 #endif
