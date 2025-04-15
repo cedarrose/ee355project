@@ -9,7 +9,6 @@ int main(){
     // cout << "----------------\n";
 
     Person c2("person_template.txt");
-    cout << "test_person_eq.cpp" << endl;
     c2.print_person();
     cout << "----------------\n";
 

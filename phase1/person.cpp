@@ -98,26 +98,26 @@ void Person::set_person(string filename){
     // Read bday
     getline(infile, line);
     birthdate = new Date(line);
-    // Read email
-    getline(infile, line);
-    size_t space_pos = line.find(' ');
-    if (space_pos != string::npos) {
-        type = line.substr(1, space_pos-1);  // get first word
-        val = line.substr(space_pos + 1);  // get rest of line
-    }
-    email = new Email(type, val);
-    cout << "email in person.cpp = " << email << endl;
 
     // Read phone
     getline(infile, line);
-    // getline(infile, val);
-    // phone = new Phone(type, val);
+    size_t space_pos = line.find(' ');
     space_pos = line.find(' ');
     if (space_pos != string::npos) {
-        type = line.substr(1, space_pos-1);  // get first word
+        type = line.substr(1, space_pos-2);  // get first word
+        val = line.substr(space_pos + 1);  // get rest of line
+        // Remove dashes from phone number
+        val.erase(remove(val.begin(), val.end(), '-'), val.end());
+    }
+    this->phone = new Phone(type, val);
+
+    // Read email
+    getline(infile, line);
+    if (space_pos != string::npos) {
+        type = line.substr(1, space_pos-2);  // get first word
         val = line.substr(space_pos + 1);  // get rest of line
     }
-    phone = new Phone(type, val);
+    this->email = new Email(type, val);
 
     // Initialize LL pointers
     next = nullptr;
@@ -149,7 +149,6 @@ bool Person::operator!=(const Person& rhs){
 
 void Person::print_person(){
     // Already implemented for you! Do not change!
-    cout << "person.cpp Printing print_person()" << endl;
 	cout << l_name <<", " << f_name << endl;
 	birthdate->print_date("Month D, YYYY");
     phone->print();
