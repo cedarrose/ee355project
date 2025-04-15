@@ -12,16 +12,27 @@ Katherine Zhou
 EE355 Final Project
 
 * PHASE 1 *
-In phase 1, we 
+In phase 1, we implemented a netowrk of Contacts using user-defined Person, Contact, Email and Phone classes.
+Our program allows users to enter new contacts manually, add new contacts from a file, save all current contacts 
+in the current network to a file, as well as remove or add contacts to the network using a main menu.
 
+
+## How to Compile & Run
+Running test_network.cpp:
+    $ g++ std=c++11 test_network.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o network.out
+    $ ./network.out
+
+Running test_person_eq.cpp:
+    $ g++ std=c++11 test_person_eq.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o person.out
+    $ ./person.out
 
 ## File Overview
 # File --> Purpose
 contact.cpp & contact.h --> Defines `Contact` abstract class + `Email`, 'Phone'
 date.cpp & date.h --> `Date` class with conversion & comparison
-misc.cpp/.h --> Prints banners and other utility output
-person.cpp/.h --> `Person` class definition and file parsing
-network.cpp/.h --> `Network` class as a doubly-linked list of `Person`
+misc.cpp & misc.h --> Prints banners and other utility output
+person.cpp & person.h --> `Person` class definition and file parsing
+network.cpp & network.h --> `Network` class as a doubly-linked list of `Person`
 networkDB.txt --> Sample database with multiple people
 person_template.txt --> Example file for loading a single person
 test_network.cpp --> Main interactive driver with CLI menu
