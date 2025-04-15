@@ -154,9 +154,9 @@ void Person::print_person(){
     email->print();
 }
 
-void Person::print_person(ofstream& outfile){
+/*void Person::print_person(ofstream& outfile){
     outfile << l_name <<", " << f_name << endl;
 	birthdate->print_date("Month D, YYYY");
     phone->print();
     email->print();
-}
+}*/
