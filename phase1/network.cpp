@@ -1,4 +1,3 @@
-
 #include "network.h"
 #include <limits>
 #include "misc.h"
@@ -360,7 +359,7 @@ void Network::showMenu(){
             cout << "Nothing matched!\n";
         
         cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        //cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "\n\nPress Enter key to go back to main menu ... ";
         string temp;
         std::getline (std::cin, temp);

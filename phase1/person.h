@@ -1,4 +1,3 @@
-
 #ifndef PERSON_H
 #define PERSON_H
 
@@ -24,6 +23,7 @@ public:
     Person(string filename);
     Person(string f_name, string l_name, string b_date, string email, string phone);
 	void print_person();
+	void print_person(ofstream& outfile);
 	void set_person();
 	void set_person(string filename);
     bool operator==(const Person& rhs);

@@ -106,8 +106,7 @@ void Person::set_person(string filename){
     if (space_pos != string::npos) {
         type = line.substr(1, space_pos-2);  // get first word
         val = line.substr(space_pos + 1);  // get rest of line
-        // Remove dashes from phone number
-        val.erase(remove(val.begin(), val.end(), '-'), val.end());
+        val.erase(remove(val.begin(), val.end(), '-'), val.end()); // remove dashes
     }
     this->phone = new Phone(type, val);
 
@@ -150,6 +149,13 @@ bool Person::operator!=(const Person& rhs){
 void Person::print_person(){
     // Already implemented for you! Do not change!
 	cout << l_name <<", " << f_name << endl;
+	birthdate->print_date("Month D, YYYY");
+    phone->print();
+    email->print();
+}
+
+void Person::print_person(ofstream& outfile){
+    outfile << l_name <<", " << f_name << endl;
 	birthdate->print_date("Month D, YYYY");
     phone->print();
     email->print();

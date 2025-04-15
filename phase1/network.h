@@ -1,19 +1,23 @@
-
 #ifndef NETWORK_H
 #define NETWORK_H
 
 #include "person.h"
 #include "date.h"
-// You may need to add more libraries 
 #include <stdlib.h>
-class Network{
+#include <dirent.h>
+#include <fstream>
+#include <string>
+using namespace std;
 
+class Network{
     private:
         Person* head;
         Person* tail;
         int count; 
         Person* search(Person* searchEntry);
         Person* search(string fname, string lname);
+        void loadDB(string filename);
+        void saveDB(string filename);
 
     public:
         Network();
