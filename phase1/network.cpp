@@ -90,7 +90,7 @@ void Network::loadDB(string filename){
     string email;
     string number;
     string dash;
-
+    //cplusplus help
     if(infile.is_open()){
         while(!infile.eof()){
             getline(infile, fname);
@@ -122,6 +122,7 @@ void Network::saveDB(string filename){
         while(current != nullptr){
             current->print_person(outfile);
         if(current->next != nullptr){
+            //copy dashes from prompt
             outfile <<"------------------------------" <<endl; 
         }
         current = current->next;
@@ -186,6 +187,7 @@ bool Network::remove(string fname, string lname){
     if(temp == nullptr){
         return false;
     }
+    //edge cases
     else{
         if((temp->prev != nullptr) && (temp->next != nullptr)){
             temp->prev->next = temp->next;
@@ -260,6 +262,7 @@ void Network::showMenu(){
             // TODO: print all the files in this same directory that have "networkDB.txt" format
             // print format: one filename one line.
             // This step just shows all the available .txt file to load.
+            //ai help with directory syntax
             DIR *dir;
             struct dirent *ent;
             if ((dir = opendir(".")) != NULL) {
