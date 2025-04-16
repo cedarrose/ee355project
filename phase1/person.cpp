@@ -153,10 +153,3 @@ void Person::print_person(){
     phone->print();
     email->print();
 }
-
-/*void Person::print_person(ofstream& outfile){
-    outfile << l_name <<", " << f_name << endl;
-	birthdate->print_date("Month D, YYYY");
-    phone->print();
-    email->print();
-}*/

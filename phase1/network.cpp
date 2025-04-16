@@ -120,15 +120,19 @@ void Network::saveDB(string filename){
     if(outfile.is_open()){
         Person* current = head;
         while(current != nullptr){
-            current->print_person(outfile);
-        if(current->next != nullptr){
-            //copy dashes from prompt
-            outfile <<"------------------------------" <<endl; 
-        }
-        current = current->next;
+            // Save in format that loadDB expects
+            outfile << current->f_name << endl;
+            outfile << current->l_name << endl;
+            outfile << current->birthdate->get_date() << endl;
+            outfile << current->email->get_contact() << endl;
+            outfile << current->phone->get_contact() << endl;
+            
+            if(current->next != nullptr){
+                outfile << "------------------------------" << endl;
+            }
+            current = current->next;
         }
         outfile.close();
-
     }
 }
 
@@ -228,7 +232,7 @@ void Network::showMenu(){
         cout << "2. Load network database \n";
         cout << "3. Add a new person \n";
         cout << "4. Remove a person \n";
-        cout << "5. Print people with last name  \n";
+        cout << "5. Print people with name \n";
         cout << "\nSelect an option ... ";
         
         if (cin >> opt) {
@@ -336,7 +340,9 @@ void Network::showMenu(){
             // TODO: Complete me!
             // print the people with the given last name
             // if not found: cout << "Person not found! \n";
-            cout << "Print people with last name \n";
+            cout << "Print people with name \n";
+            cout << "First name: ";
+            getline(cin, fname);
             cout << "Last name: ";
             getline(cin, lname);
             
@@ -345,7 +351,7 @@ void Network::showMenu(){
             Person* current = head;
 
             while(current!=nullptr){
-                if(current->l_name == lname){
+                if((current->f_name == fname) && (current->l_name == lname)){
                     current->print_person();
                     cout<<"------------------------------" << endl;
                     found = 1;
@@ -362,7 +368,6 @@ void Network::showMenu(){
             cout << "Nothing matched!\n";
         
         cin.clear();
-        //cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "\n\nPress Enter key to go back to main menu ... ";
         string temp;
         std::getline (std::cin, temp);

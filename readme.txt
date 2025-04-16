@@ -18,11 +18,11 @@ As outlined in the project guidelines, Our program allows users to enter new con
 ## How to Compile & Run
 ** use c++11 **
 Running test_network.cpp:
-    $ g++ std=c++11 test_network.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o network.out
+    $ g++ -std=c++11 test_network.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o network.out
     $ ./network.out
 
 Running test_person_eq.cpp:
-    $ g++ std=c++11 test_person_eq.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o person.out
+    $ g++ -std=c++11 test_person_eq.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o person.out
     $ ./person.out
 
 ## File Overview
@@ -39,4 +39,5 @@ test_person_eq.cpp --> Unit test for `==` and `!=` operators on `Person`
 
 We used the material learned in lectures and past labs, as well as online websites like Geeks for Geeks, in order to achieve all tasks from Phase 1. I used claude for a specific line in helping me remove the "-" from the phone number and it taught me to write: val.erase(remove(val.begin(), val.end(), '-'), val.end());
 For network.cpp, I used chatgpt to help with the showMenu opt==2 condition regarding creating and opening a directory.
-I also used https://cplusplus.com/reference/ios/ios/eof/ to help with reading a file in network.cpp
+I also used https://cplusplus.com/reference/ios/ios/eof/ to help with reading a file in network.cpp.
+In date.cpp, I was having trouble with error handling and I used chatgpt to help me wrap my case statements in a try{} to catch errors with invalid dates.
