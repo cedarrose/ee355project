@@ -8,16 +8,15 @@ Katherine Zhou
 ---
 @usc.edu
 
-
 EE355 Final Project
 
-* PHASE 1 *
+### PHASE 1
 In phase 1, we implemented a netowrk of Contacts using user-defined Person, Contact, Email and Phone classes.
-Our program allows users to enter new contacts manually, add new contacts from a file, save all current contacts 
-in the current network to a file, as well as remove or add contacts to the network using a main menu.
+As outlined in the project guidelines, Our program allows users to enter new contacts manually, add new contacts from a file, save all current contacts in the current network to a file, as well as remove or add contacts to the network using a main menu.
 
 
 ## How to Compile & Run
+** use c++11 **
 Running test_network.cpp:
     $ g++ std=c++11 test_network.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o network.out
     $ ./network.out
@@ -38,4 +37,4 @@ person_template.txt --> Example file for loading a single person
 test_network.cpp --> Main interactive driver with CLI menu
 test_person_eq.cpp --> Unit test for `==` and `!=` operators on `Person`
 
-We used the material learned in lectures and past labs, as well as online websites like Geeks for Geeks, in order to achieve all tasks from Phase 1. I used claude to help me remove the "-" from the phone number and it taught me to write: val.erase(remove(val.begin(), val.end(), '-'), val.end());
+We used the material learned in lectures and past labs, as well as online websites like Geeks for Geeks, in order to achieve all tasks from Phase 1. I used claude for a specific line in helping me remove the "-" from the phone number and it taught me to write: val.erase(remove(val.begin(), val.end(), '-'), val.end());
