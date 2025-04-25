@@ -17,13 +17,9 @@ As outlined in the project guidelines, Our program allows users to enter new con
 
 ## How to Compile & Run
 ** use c++11 **
-Running test_network.cpp:
+Running program:
     $ g++ -std=c++11 test_network.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o network.out
     $ ./network.out
-
-Running test_person_eq.cpp:
-    $ g++ -std=c++11 test_person_eq.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o person.out
-    $ ./person.out
 
 ## File Overview
 # File --> Purpose
