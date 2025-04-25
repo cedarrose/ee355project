@@ -35,13 +35,6 @@ string Date::convert_date(string date_bad_format) {
         int day = stoi(date_bad_format.substr(first + 1, second - first - 1)); // convert to int
         int year = stoi(date_bad_format.substr(second + 1)); // convert to int
         
-        
-        // Format the original date as MM/DD/YYYY
-        string month_str = (month < 10) ? "0" + to_string(month) : to_string(month);
-        string day_str = (day < 10) ? "0" + to_string(day) : to_string(day);
-        string year_str = to_string(year);
-        original_date = month_str + "/" + day_str + "/" + year_str;
-        
         string proper_month;
 
         switch(month) {

@@ -37,6 +37,9 @@ person_template.txt --> Example file for loading a single person
 test_network.cpp --> Main interactive driver with CLI menu
 test_person_eq.cpp --> Unit test for `==` and `!=` operators on `Person`
 
+## Notes
+Order of running the program: Add a person, Save them in a text file, then you can load, remove, print, etc. 
+
 We used the material learned in lectures and past labs, as well as online websites like Geeks for Geeks, in order to achieve all tasks from Phase 1. I used claude for a specific line in helping me remove the "-" from the phone number and it taught me to write: val.erase(remove(val.begin(), val.end(), '-'), val.end());
 For network.cpp, I used chatgpt to help with the showMenu opt==2 condition regarding creating and opening a directory.
 I also used https://cplusplus.com/reference/ios/ios/eof/ to help with reading a file in network.cpp.

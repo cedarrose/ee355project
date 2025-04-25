@@ -17,17 +17,43 @@ Person::~Person(){
 
 
 Person::Person(string f_name, string l_name, string b_date, string email_str, string phone_str) {
-    // TODO: Complete this method! - done i think??
+    // TODO: Complete this method! - done
     // phone and email strings are in full version
     // Storing the names directly as strings
     this->f_name = f_name;
     this->l_name = l_name;
 
     birthdate = new Date(b_date);
-    birthdate->convert_date(b_date);
 
-    email = new Email("work", email_str);
-    phone = new Phone("home", phone_str);
+    // extract the type from the  the email string to extract type and address
+    size_t email_start = email_str.find('(');
+    size_t email_end = email_str.find(')');
+    string email_type, email_addr;
+    
+    if (email_start != string::npos && email_end != string::npos) {
+        email_type = email_str.substr(email_start + 1, email_end - email_start - 1);
+        email_addr = email_str.substr(email_end + 2); // +2 to skip ") "
+    } else {
+        // fallback if format is not as expected
+        email_type = "Work";
+        email_addr = email_str;
+    }
+    email = new Email(email_type, email_addr);
+
+    // extract the type from the  the phone string to extract type and address
+    // Parse the phone string to extract type and number
+    size_t phone_start = phone_str.find('(');
+    size_t phone_end = phone_str.find(')');
+    string phone_type, phone_num;
+    
+    if (phone_start != string::npos && phone_end != string::npos) {
+        phone_type = phone_str.substr(phone_start + 1, phone_end - phone_start - 1);
+        phone_num = phone_str.substr(phone_end + 2); // +2 to skip ") "
+    } else {
+        phone_type = "Home";
+        phone_num = phone_str;
+    }
+    phone = new Phone(phone_type, phone_num);
     
     // initializing LL pointers
     next = nullptr;
@@ -50,26 +76,25 @@ void Person::set_person(){
 
     cout << "First Name: ";
     // pay attention to how we read first name, as it can have spaces!
-    std::getline(std::cin,f_name);
+    getline(cin,f_name);
 
 	cout << "Last Name: ";
-    std::getline(std::cin,l_name);
+    getline(cin,l_name);
 
     cout << "Birthdate (M/D/YYYY): ";
-    std::getline(std::cin,temp);
+    getline(cin,temp);
     // pay attention to how we passed argument to the constructor of a new object created dynamically using new command
     birthdate = new Date(temp); 
 
     cout << "Type of email address: ";
-    std::getline(std::cin, type);
+    getline(cin, type);
     cout << "Email address: ";
-    std::getline(std::cin, temp);
+    getline(cin, temp);
     email = new Email(type, temp);
-
     cout << "Type of phone number: ";
-    std::getline(std::cin, type);
+    getline(cin, type);
     cout << "Phone number: ";
-    std::getline(std::cin, temp);
+    getline(cin, temp);
     phone = new Phone(type, temp);
 
     // Initialize linked list pointers
@@ -150,6 +175,8 @@ void Person::print_person(){
     // Already implemented for you! Do not change!
 	cout << l_name <<", " << f_name << endl;
 	birthdate->print_date("Month D, YYYY");
-    phone->print();
+    cout << "Email: ";
     email->print();
+    cout << "Phone: ";
+    phone->print();
 }

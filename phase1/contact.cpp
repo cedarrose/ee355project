@@ -16,18 +16,15 @@ Email::Email(string type, string email_addr){
 
 void Email::set_contact(){
     // TODO: Do not change the prompts!
-	
     cout << "Enter the type of email address: ";
-    // some code here
     cin >> type;
     cout << "Enter email address: ";
-    // some code here
     cin >> email_addr;
 }
 
 
 string Email::get_contact(string style){
-    // Note: We have default argument in declaration and not in definition!
+    // default argument in declaration and not in definition
     if (style=="full") {
 	    return "(" + type + ") " + email_addr;
     }
@@ -36,32 +33,33 @@ string Email::get_contact(string style){
     }
 }
 
-
 void Email::print(){
-    // Note: get_contact is called with default argument
+	// Note: get_contact is called with default argument
 	cout << get_contact() << endl;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
+// --------------------
+
 Phone::Phone(string type, string num){
     // TODO: It is possible that num includes "-" or not, manage it!
     // TODO: Complete this method!
     // Note: We don't want to use C++11! stoi is not valid!
     this->type = type;
 
-    phone_num = ""; // clear string first
-    
-    int count = 0;
-    for (char c : num)
-    {
-        // Only adding them if they are digits
-        if (isdigit(c))
-        {
-            phone_num += c;
-            count++;
+    string digits = ""; // cleared set of digits first
+    for (char c : num) {
+        if (isdigit(c)) {
+            digits += c;
         }
-        if (count == 3 || count == 6)
-            phone_num += '-';
+    }
+    // format with dashes if we have at least 10 digits
+    if (digits.length() >= 10) {
+        phone_num = digits.substr(0, 3) + "-" + 
+                   digits.substr(3, 3) + "-" + 
+                   digits.substr(6);
+    } else {
+        // otherwise, just use whatever digits we have
+        phone_num = digits;
     }
 }
 
@@ -75,19 +73,23 @@ void Phone::set_contact(){
     string num;
     cin >> num;
 
-    // Only entering phone number without dashes
     // Note: same code as constructor Phone::Phone(string type, string num)
-    int count = 0;
-    for (char c : num)
-    {
-        // Only adding them if they are digits
-        if (isdigit(c))
-        {
-            phone_num += c;
-            count++;
+    // clear phone_num and extract only the digits
+    phone_num = "";
+    string digits = "";
+    for (char c : num) {
+        if (isdigit(c)) {
+            digits += c;
         }
-        if (count == 3 || count == 6)
-            phone_num += '-';
+    }
+    // format with dashes if we have at least 10 digits
+    if (digits.length() >= 10) {
+        phone_num = digits.substr(0, 3) + "-" + 
+                   digits.substr(3, 3) + "-" + 
+                   digits.substr(6);
+    } else {
+        // otherwise, use whatever digits we have
+        phone_num = digits;
     }
 }
 
@@ -98,7 +100,8 @@ string Phone::get_contact(string style){
 	    return "(" + type + ") " + phone_num;
     }
     else {    
-        return phone_num; }
+        return phone_num; 
+    }
 }
 
 void Phone::print(){

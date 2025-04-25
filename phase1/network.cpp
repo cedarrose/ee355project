@@ -90,7 +90,7 @@ void Network::loadDB(string filename){
     string email;
     string number;
     string dash;
-    //cplusplus help
+    //c++ help
     if(infile.is_open()){
         while(!infile.eof()){
             getline(infile, fname);
@@ -123,13 +123,11 @@ void Network::saveDB(string filename){
             // Save in format that loadDB expects
             outfile << current->f_name << endl;
             outfile << current->l_name << endl;
-            outfile << current->birthdate->get_date() << endl;
-            outfile << current->email->get_contact() << endl;
-            outfile << current->phone->get_contact() << endl;
-            
-            if(current->next != nullptr){
-                outfile << "------------------------------" << endl;
-            }
+            outfile << current->birthdate->get_original_date() << endl;
+            outfile << current->email->get_contact("full") << endl;
+            outfile << current->phone->get_contact("full") << endl;
+            outfile << "------------------------------" << endl;
+
             current = current->next;
         }
         outfile.close();
@@ -226,27 +224,28 @@ void Network::showMenu(){
     while(1){
         cout << "\033[2J\033[1;1H";
         printMe("banner"); // from misc library
-
+        // display menu options
         cout << "Select from below: \n";
         cout << "1. Save network database \n";
         cout << "2. Load network database \n";
         cout << "3. Add a new person \n";
         cout << "4. Remove a person \n";
-        cout << "5. Print people with name \n";
+        cout << "5. Print people with a specific last name \n";
         cout << "\nSelect an option ... ";
-        
+
+        // input validation/ error handling
         if (cin >> opt) {
             cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         } else {
             cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Wrong option! " << endl;
             return;
         }
         
         // You may need these variables! Add more if you want!
-        string fname, lname, fileName, bdate, email, number;
+        string fname, lname, fileName, bdate, email, number, temp, type;
         cout << "\033[2J\033[1;1H";
 
         if (opt==1){
@@ -307,15 +306,27 @@ void Network::showMenu(){
             getline(cin, lname);
 
             if(search(fname,lname) == nullptr){
-                cout<<"Enter birth date: ";
+                cout << "Birthdate (M/D/YYYY): ";
                 getline(cin, bdate);
-                cout<<"Enter email: ";
-                getline(cin, email);
-                cout<<"Enter number: ";
-                getline(cin, number);
+
+                cout << "Type of email address: ";
+                getline(cin, type);
+                cout << "Email address: ";
+                getline(cin, temp);
+                email = "(" + type + ")" + temp;
+
+                cout << "Type of phone number: ";
+                getline(cin, type);
+                cout << "Phone number: ";
+                getline(cin, temp);
+                number = "(" + type + ")"+ temp;
 
                 Person* newPerson = new Person(fname, lname, bdate, email, number);
                 push_front(newPerson);
+                cout << "Person added!" << endl;
+            }
+            else {
+                cout << "Person already exists!" << endl;
             }
 
         }
@@ -340,9 +351,7 @@ void Network::showMenu(){
             // TODO: Complete me!
             // print the people with the given last name
             // if not found: cout << "Person not found! \n";
-            cout << "Print people with name \n";
-            cout << "First name: ";
-            getline(cin, fname);
+            cout << "Print people with last name name \n";
             cout << "Last name: ";
             getline(cin, lname);
             
@@ -351,7 +360,7 @@ void Network::showMenu(){
             Person* current = head;
 
             while(current!=nullptr){
-                if((current->f_name == fname) && (current->l_name == lname)){
+                if(current->l_name == lname){
                     current->print_person();
                     cout<<"------------------------------" << endl;
                     found = 1;
@@ -369,8 +378,7 @@ void Network::showMenu(){
         
         cin.clear();
         cout << "\n\nPress Enter key to go back to main menu ... ";
-        string temp;
-        std::getline (std::cin, temp);
+        getline (cin, temp);
         cout << "\033[2J\033[1;1H";
     }
 }
