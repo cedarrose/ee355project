@@ -180,3 +180,15 @@ void Person::print_person(){
     cout << "Phone: ";
     phone->print();
 }
+
+// Added in phase 2
+void Person::makeFriend(Person* newFriend) {
+    // check if the person is already a friend to avoid duplicates
+    for(auto friend_ptr : myfriends) {
+        if(friend_ptr == newFriend) {
+            return; // already was a friend
+        }
+    }
+    // add the friend to the vector
+    myfriends.push_back(newFriend);
+}
