@@ -7,14 +7,14 @@ from collections import defaultdict
 class NetworkAnalyzer:
     def __init__(self, database_file):
         self.df = pd.read_csv(database_file)
-        self.G = nx.Graph()
+        self.graph = nx.Graph()
         self._build_network()
     
     def _build_network(self):
         # Add nodes (people) to the network
         for _, row in self.df.iterrows():
             person_id = f"{row['first_name']}_{row['last_name']}"
-            self.G.add_node(person_id, 
+            self.graph.add_node(person_id, 
                           first_name=row['first_name'],
                           last_name=row['last_name'],
                           birthdate=row['birthdate'],
@@ -39,20 +39,20 @@ class NetworkAnalyzer:
                         common_attributes.append('state')
                     
                     if common_attributes:
-                        self.G.add_edge(person1, person2, 
+                        self.graph.add_edge(person1, person2, 
                                       common_attributes=common_attributes)
     
     def analyze_network(self):
         print("\nNetwork Analysis Results:")
-        print(f"Number of people in network: {self.G.number_of_nodes()}")
-        print(f"Number of connections: {self.G.number_of_edges()}")
+        print(f"Number of people in network: {self.graph.number_of_nodes()}")
+        print(f"Number of connections: {self.graph.number_of_edges()}")
         
         # Calculate average degree
-        avg_degree = sum(dict(self.G.degree()).values()) / self.G.number_of_nodes()
+        avg_degree = sum(dict(self.graph.degree()).values()) / self.graph.number_of_nodes()
         print(f"Average number of connections per person: {avg_degree:.2f}")
         
         # Find most connected people
-        degrees = dict(self.G.degree())
+        degrees = dict(self.graph.degree())
         most_connected = sorted(degrees.items(), key=lambda x: x[1], reverse=True)[:3]
         print("\nMost connected people:")
         for person, degree in most_connected:
@@ -61,7 +61,7 @@ class NetworkAnalyzer:
         # Analyze common attributes
         print("\nCommon attributes analysis:")
         attribute_counts = defaultdict(int)
-        for _, _, data in self.G.edges(data=True):
+        for _, _, data in self.graph.edges(data=True):
             for attr in data['common_attributes']:
                 attribute_counts[attr] += 1
         
@@ -70,17 +70,17 @@ class NetworkAnalyzer:
     
     def visualize_network(self):
         plt.figure(figsize=(12, 8))
-        pos = nx.spring_layout(self.G)
+        pos = nx.spring_layout(self.graph)
         
         # Draw nodes
-        nx.draw_networkx_nodes(self.G, pos, node_color='lightblue', 
+        nx.draw_networkx_nodes(self.graph, pos, node_color='lightblue', 
                              node_size=1000, alpha=0.6)
         
         # Draw edges
-        nx.draw_networkx_edges(self.G, pos, alpha=0.4)
+        nx.draw_networkx_edges(self.graph, pos, alpha=0.4)
         
         # Draw labels
-        nx.draw_networkx_labels(self.G, pos, font_size=8)
+        nx.draw_networkx_labels(self.graph, pos, font_size=8)
         
         plt.title("Social Network Visualization")
         plt.axis('off')
