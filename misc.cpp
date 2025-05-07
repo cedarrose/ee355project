@@ -1,4 +1,6 @@
-
+#include <iostream>
+#include <string>
+#include <algorithm>
 #include "misc.h"
 
 void printMe(string type){
@@ -17,7 +19,7 @@ void printMe(string type){
 
 string codeName(string str1, string str2){
     string result = str1 + str2;
-    result.erase(remove_if(result.begin(), result.end(), ::isspace), result.end());
+    result.erase(std::remove_if(result.begin(), result.end(), ::isspace), result.end());
     transform(result.begin(), result.end(), result.begin(), ::tolower);
     return result;
 }

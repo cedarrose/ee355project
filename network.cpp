@@ -323,6 +323,7 @@ void Network::showMenu(){
                 number = "(" + type + ")"+ temp;
 
                 Person* newPerson = new Person(fname, lname, bdate, email, number);
+                
                 push_front(newPerson);
                 cout << "Person added!" << endl;
             }

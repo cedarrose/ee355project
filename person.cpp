@@ -1,4 +1,9 @@
 #include "person.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 Person::Person(){
@@ -32,7 +37,7 @@ Person::Person(string f_name, string l_name, string b_date, string email_str, st
     
     if (email_start != string::npos && email_end != string::npos) {
         email_type = email_str.substr(email_start + 1, email_end - email_start - 1);
-        email_addr = email_str.substr(email_end + 2); // +2 to skip ") "
+        email_addr = email_str.substr(email_end + 1); // +2 to skip ")"
     } else {
         // fallback if format is not as expected
         email_type = "Work";
@@ -131,7 +136,7 @@ void Person::set_person(string filename){
     if (space_pos != string::npos) {
         type = line.substr(1, space_pos-2);  // get first word
         val = line.substr(space_pos + 1);  // get rest of line
-        val.erase(remove(val.begin(), val.end(), '-'), val.end()); // remove dashes
+        val.erase(std::remove(val.begin(), val.end(), '-'), val.end()); // remove dashes
     }
     this->phone = new Phone(type, val);
 
