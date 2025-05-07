@@ -102,9 +102,13 @@ void Network::loadDB(string filename){
             getline(infile, bday);
             getline(infile, email);
             getline(infile, number);
+            // cout << endl << "email: " << email << endl << endl;
 
             Person* newPerson = new Person(fname, lname, bday, email, number);
-            push_back(newPerson);
+            // push_back(newPerson);
+            push_front(newPerson);
+
+            // cout << endl << "newPerson: " << newPerson->f_name << " " << newPerson->l_name << endl << endl;
 
             if(!infile.eof()){
                 getline(infile, dash);

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include "misc.h"
 using namespace std;
 
 Person::Person(){
@@ -17,7 +18,6 @@ Person::~Person(){
     delete birthdate;
     delete email;
     delete phone;
-    
 }
 
 
@@ -27,6 +27,7 @@ Person::Person(string f_name, string l_name, string b_date, string email_str, st
     // Storing the names directly as strings
     this->f_name = f_name;
     this->l_name = l_name;
+    this->code_name = codeName(f_name, l_name);
 
     birthdate = new Date(b_date);
 
@@ -37,7 +38,7 @@ Person::Person(string f_name, string l_name, string b_date, string email_str, st
     
     if (email_start != string::npos && email_end != string::npos) {
         email_type = email_str.substr(email_start + 1, email_end - email_start - 1);
-        email_addr = email_str.substr(email_end + 1); // +2 to skip ")"
+        email_addr = email_str.substr(email_end + 1); // +1 to skip ")"
     } else {
         // fallback if format is not as expected
         email_type = "Work";
@@ -53,7 +54,7 @@ Person::Person(string f_name, string l_name, string b_date, string email_str, st
     
     if (phone_start != string::npos && phone_end != string::npos) {
         phone_type = phone_str.substr(phone_start + 1, phone_end - phone_start - 1);
-        phone_num = phone_str.substr(phone_end + 2); // +2 to skip ") "
+        phone_num = phone_str.substr(phone_end + 1); // +1 to skip ")"
     } else {
         phone_type = "Home";
         phone_num = phone_str;
@@ -101,6 +102,8 @@ void Person::set_person(){
     cout << "Phone number: ";
     getline(cin, temp);
     phone = new Phone(type, temp);
+
+    this->code_name = codeName(f_name, l_name);
 
     // Initialize linked list pointers
     next = nullptr;
@@ -176,6 +179,7 @@ bool Person::operator!=(const Person& rhs){
 }
 
 
+// Updated in phase 2
 void Person::print_person(){
     // Already implemented for you! Do not change!
 	cout << l_name <<", " << f_name << endl;
@@ -184,6 +188,93 @@ void Person::print_person(){
     email->print();
     cout << "Phone: ";
     phone->print();
+    // Added in phase 2
+    // cout << endl << endl <<"Printing friends: " << endl << endl;
+    for (auto friend_ptr : myfriends) {
+        // cout << codeName(friend_ptr->f_name, friend_ptr->l_name) << " ";
+        cout << friend_ptr->code_name << " ";
+        cout << "(" << friend_ptr->f_name << " " << friend_ptr->l_name << ")" << endl;
+    }
+}
+
+// Added in phase 2
+void Person::print_friends(){
+    vector<Person*> sorted_friends;
+    
+    // First friend goes directly into the vector
+    if (!myfriends.empty()) {
+        sorted_friends.push_back(myfriends[0]);
+    }
+    
+    int count;
+    for (auto friend_ptr : myfriends)
+    {
+        count = 0;
+        while (!myfriends.empty() && count < sorted_friends.size() && friend_ptr->f_name[0] >= sorted_friends[count]->f_name[0])
+        {
+            // If first letter is equal, check the second letter
+            if (friend_ptr->f_name[0] == sorted_friends[count]->f_name[0])
+            {
+                // Sort based on second letter. friend_ptr should be before sorted_friends[count]
+                if (friend_ptr->f_name.length() > 1 && sorted_friends[count]->f_name.length() > 1 
+                    && friend_ptr->f_name[1] > sorted_friends[count]->f_name[1])
+                {
+                    count++;
+                }
+                break;
+            }
+            else
+            {
+                count ++;
+            }
+        }
+        sorted_friends.insert(sorted_friends.begin() + count, friend_ptr);
+    }
+        
+    // Insert remaining friends in sorted order
+    // for (size_t i = 1; i < myfriends.size(); i++) {
+    //     Person* friend_ptr = myfriends[i];
+    //     size_t insert_pos = 0;
+        
+    //     // Find the correct position to insert
+    //     while (insert_pos < sorted_friends.size()) {
+    //         // Compare first letters
+    //         if (friend_ptr->f_name[0] < sorted_friends[insert_pos]->f_name[0]) {
+    //             break;
+    //         }
+    //         // If first letters are equal, compare second letters if they exist
+    //         else if (friend_ptr->f_name[0] == sorted_friends[insert_pos]->f_name[0] &&
+    //                  friend_ptr->f_name.length() > 1 && 
+    //                  sorted_friends[insert_pos]->f_name.length() > 1) {
+    //             if (friend_ptr->f_name[1] < sorted_friends[insert_pos]->f_name[1]) {
+    //                 break;
+    //             }
+    //         }
+    //         insert_pos++;
+    //     }
+        
+    //     // Insert at the found position
+    //     sorted_friends.insert(sorted_friends.begin() + insert_pos, friend_ptr);
+    // }
+    
+    // Print the sorted friends
+    for (auto friend_ptr : sorted_friends) {
+        friend_ptr->print_person();
+        cout << "----------------\n";
+    }
+}
+
+string Person::get_firstName(){
+    return f_name;
+}
+
+string Person::get_lastName(){
+    return l_name;
+}
+
+void Person::set_codeName(string codeName){
+    this->code_name = codeName;
+    cout << endl << "code_name in set_codeName(): " << code_name << endl << endl;
 }
 
 // Added in phase 2

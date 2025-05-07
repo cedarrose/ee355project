@@ -2,6 +2,7 @@
 #include <string>
 #include <algorithm>
 #include "misc.h"
+#include "person.h"
 
 void printMe(string type){
     if (type == "banner"){

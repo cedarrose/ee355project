@@ -5,12 +5,14 @@
 #include "contact.h"
 #include "fstream"
 #include <vector>
+#include "misc.h"
 class Person{
     friend class Network;
 
 private:
 	string f_name;
 	string l_name;
+    string code_name;
 	Date *birthdate;
     Email *email;
     Phone *phone;
@@ -25,6 +27,9 @@ public:
     ~Person();
     Person(string filename);
     Person(string f_name, string l_name, string b_date, string email, string phone);
+    string get_firstName();
+    string get_lastName();
+    void set_codeName(string codeName);
 	void print_person();
 	void set_person();
 	void set_person(string filename);
@@ -32,6 +37,7 @@ public:
     bool operator!=(const Person& rhs);
     // added in Phase 2:
     void makeFriend(Person* newFriend);
+    void print_friends();
 };
 
 
