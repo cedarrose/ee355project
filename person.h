@@ -4,6 +4,7 @@
 #include "date.h"
 #include "contact.h"
 #include "fstream"
+#include <vector>
 class Person{
     friend class Network;
 
