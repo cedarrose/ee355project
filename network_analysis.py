@@ -12,7 +12,8 @@ class NetworkAnalyzer:
     
     def _build_network(self):
         # Add nodes (people) to the network
-        for _, row in self.df.iterrows():
+        # Read through the dataframe we just created in __init__
+        for index, row in self.df.iterrows():
             person_id = f"{row['first_name']}_{row['last_name']}"
             self.graph.add_node(person_id, 
                           first_name=row['first_name'],
@@ -25,20 +26,22 @@ class NetworkAnalyzer:
         # Create edges based on common attributes
         for i, row1 in self.df.iterrows():
             for j, row2 in self.df.iterrows():
-                if i < j:  # Avoid duplicate edges
+                if i < j:
                     person1 = f"{row1['first_name']}_{row1['last_name']}"
                     person2 = f"{row2['first_name']}_{row2['last_name']}"
                     
-                    # Create edges based on common attributes
+                    # Creating a list of the common attributes between people/nodes
                     common_attributes = []
-                    if row1['college'] == row2['college']:
+                    if (row1['college'] == row2['college']):
                         common_attributes.append('college')
-                    if row1['major'] == row2['major']:
+                        
+                    if (row1['major'] == row2['major']):
                         common_attributes.append('major')
-                    if row1['state'] == row2['state']:
+
+                    if (row1['state'] == row2['state']):
                         common_attributes.append('state')
                     
-                    if common_attributes:
+                    if common_attributes: # If common_attributes is not empty
                         self.graph.add_edge(person1, person2, 
                                       common_attributes=common_attributes)
     
@@ -91,7 +94,8 @@ def main():
     analyzer = NetworkAnalyzer('network_database.csv')
     analyzer.analyze_network()
     analyzer.visualize_network()
-    print("\nNetwork visualization saved as 'network_visualization.png'")
+    print()
+    print("Network visualization saved as 'network_visualization.png'")
 
 if __name__ == "__main__":
     main() 
