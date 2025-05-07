@@ -1,0 +1,6 @@
+first_name,last_name,birthdate,email_type,email,phone_type,phone,college,major,state
+John,Smith,1/15/1990,Work,john.smith@company.com,Home,123-456-7890,USC,Electrical Engineering,CA
+Alice,Johnson,3/22/1992,Personal,alice.j@email.com,Mobile,234-567-8901,UCLA,Computer Science,CA
+Bob,Williams,7/8/1988,Work,bob.w@tech.com,Work,345-678-9012,Stanford,Data Science,CA
+Emma,Davis,11/30/1995,Personal,emma.d@email.com,Home,456-789-0123,USC,Computer Engineering,CA
+Michael,Brown,5/17/1991,Work,mike.b@company.com,Mobile,567-890-1234,UCLA,Electrical Engineering,CA 
