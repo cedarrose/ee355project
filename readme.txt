@@ -18,8 +18,8 @@ As outlined in the project guidelines, Our program allows users to enter new con
 ## How to Compile & Run
 ** use c++11 **
 Running program:
-    $ g++ -std=c++11 test_network.cpp network.cpp person.cpp contact.cpp date.cpp misc.cpp -o network.out
-    $ ./network.out
+    $ g++ -o test_network test_network.cpp person.cpp contact.cpp date.cpp misc.cpp network.cpp -std=c++11
+    $ ./test_network
 
 ## File Overview
 # File --> Purpose
@@ -32,9 +32,14 @@ networkDB.txt --> Sample database with multiple people
 person_template.txt --> Example file for loading a single person
 test_network.cpp --> Main interactive driver with CLI menu
 test_person_eq.cpp --> Unit test for `==` and `!=` operators on `Person`
+test_friends.cpp --> Unit test for "print_friends()" method in Phase 2
+network_analysis.py --> Python file for Phase 3, mapping graph relationship between people
 
 ## Notes
 Order of running the program: Add a person, Save them in a text file, then you can load, remove, print, etc. 
+You can also now load a pre-existing file into your network, save the current network into a new txt file and 
+connect people with each other by adding multiple friends. Each person is also now assigned a codename/id based
+on their information.
 
 We used the material learned in lectures and past labs, as well as online websites like Geeks for Geeks, in order to achieve all tasks from Phase 1. I used claude for a specific line in helping me remove the "-" from the phone number and it taught me to write: val.erase(remove(val.begin(), val.end(), '-'), val.end());
 For network.cpp, I used chatgpt to help with the showMenu opt==2 condition regarding creating and opening a directory.
@@ -55,4 +60,5 @@ packages from requirements.txt.
 
 Source for Extra Credit:
 For graphing the nodes - https://networkx.org/documentation/stable/reference/generated/networkx.drawing.nx_pylab.draw_networkx_edges.html
-We also used ChatGPT to come up with some dummy data to populate our CSV database with our given specifications.
+We also used AI tools to come up with some dummy data to populate our CSV database with our given specifications.
+
